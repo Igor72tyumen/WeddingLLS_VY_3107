@@ -3,453 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Свадьба Вячеслава и Юлии • 31.07.2026</title>
+  <title>Вячеслав и Юлия • Свадьба 31.07.2026</title>
 
   <!-- Шрифты -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet" />
 
+  <!-- Стили -->
   <style>
     * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* Плавное появление элементов */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
-}
+    body {
+      font-family: "Raleway", sans-serif;
+      background: #fff;
+      color: #333;
+      line-height: 1.6;
+      position: relative;
+    }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* Parallax фон */
+    .parallax-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
 
-body {
-  font-family: "Raleway", sans-serif;
-  background: #fff;
-  color: #333;
-  line-height: 1.6;
-  background-image: url('images/background.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-}
+    .parallax-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 150%;
+      background: url('images/background.jpg') 50% 50% no-repeat;
+      background-size: cover;
+      transform: translateY(0);
+    }
 
-.overlay {
-  background: linear-gradient(135deg, rgba(255,255,250,0.94) 0%, rgba(255,245,240,0.96) 100%);
-  min-height: 100vh;
-  padding: 20px 10px;
-}
+    .main-content {
+      position: relative;
+      z-index: 1;
+    }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-/* Вступление */
-.intro {
-  text-align: center;
-  padding: 60px 20px 40px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  margin-bottom: 30px;
-  border: 1px solid rgba(255,220,230,0.5);
-  backface-visibility: hidden;
-}
+    /* Заголовки */
+    h1, h2 {
+      font-family: "Playfair Display", serif;
+    }
 
-.intro h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  color: #3a3a3a;
-  font-weight: 700;
-}
+    /* Hero */
+    .hero {
+      padding: 120px 0 80px;
+      text-align: center;
+    }
 
-.intro .couple {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #555;
-  margin-bottom: 6px;
-}
+    .hero h1 {
+      font-size: 2.6rem;
+      margin-bottom: 8px;
+      color: #333;
+    }
 
-.intro .date {
-  font-size: 1.1rem;
-  color: #888;
-  margin-bottom: 18px;
-}
+    .date {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 16px;
+    }
 
-.intro p {
-  max-width: 700px;
-  margin: 0 auto 10px;
-  font-size: 1.05rem;
-}
+    .intro-text {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      font-size: 1.1rem;
+    }
 
-/* Секции */
-.section {
-  margin-bottom: 36px;
-  background: rgba(255,255,255,0.92);
-  border-radius: 12px;
-  padding: 28px 24px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  border: 1px solid rgba(255,220,230,0.5);
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
+    /* Секции */
+    .section {
+      padding: 60px 0;
+    }
 
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      text-align: center;
+    }
 
-.section h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 1.6rem;
-  margin-bottom: 16px;
-  color: #333;
-}
+    /* Наша история */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
 
-/* Тайминг */
-.timeline ul {
-  list-style: none;
-}
+    .story-item {
+      text-align: center;
+    }
 
-.timeline li {
-  margin-bottom: 14px;
-  padding-left: 18px;
-  border-left: 3px solid #e91e63;
-  position: relative;
-}
+    .story-item img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-.timeline .time {
-  display: inline-block;
-  font-weight: 600;
-  margin-right: 6px;
-  color: #555;
-}
+    /* Галерея */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
 
-.timeline .desc {
-  color: #555;
-  font-size: 1.05rem;
-}
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-.timeline .address {
-  margin-top: 6px;
-  font-size: 0.95rem;
-  color: #777;
-}
+    /* RSVP */
+    .rsvp form {
+      max-width: 540px;
+      margin: 0 auto;
+    }
 
-/* Дресс‑код */
-.dresscode {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
+    .rsvp label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
 
-.dresscode .column {
-  flex: 1;
-  min-width: 280px;
-}
+    .rsvp input[type="text"],
+    .rsvp select,
+    .rsvp textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.dresscode img {
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .rsvp input[type="text"]:focus,
+    .rsvp select:focus,
+    .rsvp textarea:focus {
+      border-color: #333;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.12);
+      outline: none;
+    }
 
-.dresscode img:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-}
+    /* Кнопки */
+    .btn-primary {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 30px;
+      border: none;
+      background: #333;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
 
-.dresscode-caption {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #777;
-  text-align: center;
-}
+    .btn-grow:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
 
-/* Карта */
-.map {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
+    .btn-bounce:hover {
+      animation: bounce 0.4s ease-out;
+    }
 
-.map-item {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-  transition: transform 0.25s ease;
-}
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
 
-.map-item:hover {
-  transform: translateY(-4px);
-}
+    .thanks {
+      margin-top: 16px;
+      padding: 12px;
+      background: #f0f8f2;
+      color: #333;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      text-align: center;
+      display: none;
+    }
 
-.map-item h3 {
-  margin: 0;
-  padding: 12px 16px;
-  background: #333;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 500;
-}
+    .footer {
+      padding: 20px 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      background: #f8f8f8;
+      border-top: 1px solid #eee;
+    }
 
-.map-item iframe {
-  width: 100%;
-  height: 260px;
-  border: 0;
-}
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+    }
 
-/* Опросник */
-.rsvp form label {
-  display: block;
-  margin-top: 16px;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.rsvp form label:hover {
-  color: #e91e63;
-}
-
-.rsvp input[type="text"],
-.rsvp select,
-.rsvp textarea {
-  width: 100%;
-  padding: 10px 12px;
-  margin-top: 6px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  transition: border 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  background: #fff;
-}
-
-.rsvp input[type="text"]:focus,
-.rsvp select:focus,
-.rsvp textarea:focus {
-  border-color: #e91e63;
-  box-shadow: 0 0 0 3px rgba(233,30,99,0.15);
-  outline: none;
-}
-
-.radio-group {
-  margin-top: 6px;
-}
-
-.radio-group label {
-  margin-right: 16px;
-  font-weight: normal;
-}
-
-/* Кнопка с плавной анимацией */
-.submit-btn {
-  margin-top: 22px;
-  padding: 12px 26px;
-  font-size: 1.05rem;
-  font-weight: 500;
-  border-radius: 30px;
-  border: none;
-  background: linear-gradient(135deg, #e91e63 0%, #9c27b0 100%);
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(233,30,99,0.35);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
-}
-
-.submit-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(233,30,99,0.45);
-}
-
-.submit-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(233,30,99,0.35);
-}
-
-/* Блок «спасибо» */
-.thanks {
-  margin-top: 16px;
-  padding: 12px;
-  background: linear-gradient(135deg, #4caf50 0%, #2196f3 100%);
-  color: #fff;
-  border-radius: 6px;
-  font-size: 1.05rem;
-  text-align: center;
-  display: none;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  animation: fadeInUp 0.5s ease-out forwards;
-}
-
-/* Пожелания */
-.wishes {
-  margin-top: 28px;
-  padding: 18px;
-  border-radius: 12px;
-  background: rgba(255,245,250,0.8);
-  border-left: 4px solid #e91e63;
-}
-
-.wishes h2 {
-  font-size: 1.5rem;
-}
-
-.wishes ul {
-  margin-top: 12px;
-  margin-left: 20px;
-}
-
-.wishes li {
-  margin-bottom: 10px;
-  font-size: 1.05rem;
-}
-
-/* Футер */
-.footer {
-  font-size: 0.9rem;
-  color: #333;
-  text-align: center;
-  margin-top: 40px;
-  padding: 16px 0;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.88);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-  .map {
-    grid-template-columns: 1fr;
-  }
-
-  .intro h1 {
-    font-size: 1.9rem;
-  }
-
-  .intro .couple {
-    font-size: 1.3rem;
-  }
-}
+    @media (max-width: 768px) {
+      .hero { padding: 80px 0 60px; }
+      .hero h1 { font-size: 2rem; }
+      .story-grid { grid-template-columns: 1fr; }
+      .section { padding: 40px 0; }
+    }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="container">
 
-      <!-- Вступление -->
-      <section class="intro">
-        <h1>Приглашение на свадьбу</h1>
-        <div class="couple">Вячеслав и Юлия</div>
-        <div class="date">31.07.2026</div>
+  <!-- Parallax фон -->
+  <div class="parallax-container">
+    <div class="parallax-bg"></div>
+  </div>
 
-        <p>
-          ДОРОГИЕ РОДНЫЕ И БЛИЗКИЕ!
+  <main class="main-content">
+    <section class="section hero fade-in">
+      <div class="container">
+        <h1>Вячеслав и Юлия</h1>
+        <p class="date">31.07.2026</p>
+        <p class="intro-text">
+          В этом году один день станет для нас особенно значимым, и мы хотим провести его в кругу самых близких нам людей.
         </p>
-        <p>
-          В этом году один день станет для нас особенно значимым, и мы хотим провести его в кругу самых близких нам людей. Мы счастливы пригласить Вас отпраздновать вместе наш особенный и тёплый день — день нашей СВАДЬБЫ.
-        </p>
-        <p>
-          Этот день станет началом нашей долгой, счастливой, семейной жизни.
-        </p>
-      </section>
+        <a href="#rsvp" class="btn-primary btn-bounce">Подтвердить присутствие</a>
+      </div>
+    </section>
 
-      <!-- Тайминг и адреса -->
-      <section class="section">
-        <h2>Что ждёт Вас в этот день</h2>
-
-        <div class="timeline">
-          <ul>
-            <li>
-              <span class="time">10:00</span>
-              <span class="desc">Торжественная регистрация в ЗАГСе</span>
-              <div class="address">
-                г. Тюмень, ул. Малыгина, д. 85, Янтарный зал
-              </div>
-            </li>
-
-            <li>
-              <span class="time">16:30</span>
-              <span class="desc">Сбор гостей на банкете. Для Вас будет организован фуршетный стол</span>
-              <div class="address">
-                с. Шорохово, ул. Калинина, 16А
-              </div>
-            </li>
-
-            <li>
-              <span class="time">17:00 – 22:00</span>
-              <span class="desc">Празднование банкета. Будет много танцев, веселья, поздравлений и, конечно, любви.</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- Дресс‑код -->
-      <section class="section">
-        <h2>Дресс‑код</h2>
-        <p>Просим поддержать нашу цветовую атмосферу и выбрать наряд в стиле, близком к нашим примерам.</p>
-
-        <div class="dresscode">
-          <div class="column">
-            <img src="images/dresscode1.jpg" alt="Дресс‑код 1" />
-            <div class="dresscode-caption">
-              Пример 1: одежда с нашей палитрой и нежными акцентами.
-            </div>
+    <!-- Наша история -->
+    <section class="section story fade-in" id="story">
+      <div class="container">
+        <h2>Наша история</h2>
+        <div class="story-grid">
+          <div class="story-item">
+            <img src="images/story-1.jpg" alt="Старт нашей истории" class="fade-in" />
+            <p>Как мы познакомились и сделали первый шаг навстречу друг другу.</p>
           </div>
-          <div class="column">
-            <img src="images/dresscode2.jpg" alt="Дресс‑код 2" />
-            <div class="dresscode-caption">
-              Пример 2: спокойные оттенки с акцентами на свадебной гамме.
-            </div>
+          <div class="story-item">
+            <img src="images/story-2.jpg" alt="Счастливые моменты" class="fade-in" />
+            <p>Любимые моменты, которые привели нас к решению пожениться.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Карта мероприятий -->
-      <section class="section">
-        <h2>Где мы будем</h2>
-
-        <div class="map">
-          <!-- ЗАГС -->
-          <div class="map-item">
-            <h3>ЗАГС — регистрация</h3>
-            <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=65.526%2C57.152&z=12&mode=search&text=Тюмень,+ул.+Малыгина,+85,+Янтарный+зал"
-              allowfullscreen=""
-              loading="lazy">
-            </iframe>
-          </div>
-
-          <!-- Банкет -->
-          <div class="map-item">
-            <h3>Банкет — Шорохово, Калинина 16А</h3>
-            <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=65.000%2C57.000&z=12&mode=search&text=Шорохово,+ул.+Калинина,+16А"
-              allowfullscreen=""
-              loading="lazy">
-            </iframe>
-          </div>
+    <!-- Галерея -->
+    <section class="section gallery fade-in" id="gallery">
+      <div class="container">
+        <h2>Галерея</h2>
+        <div class="gallery-grid">
+          <img src="images/gallery-1.jpg" alt="Свадебная галерея 1" class="fade-in" />
+          <img src="images/gallery-2.jpg" alt="Свадебная галерея 2" class="fade-in" />
+          <img src="images/gallery-3.jpg" alt="Свадебная галерея 3" class="fade-in" />
+          <img src="images/gallery-4.jpg" alt="Свадебная галерея 4" class="fade-in" />
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Опрос через Firebase -->
-      <section class="section rsvp">
+    <!-- RSVP -->
+    <section class="section rsvp fade-in" id="rsvp">
+      <div class="container">
         <h2>Подтверждение присутствия</h2>
-        <p>Ответьте на несколько вопросов, чтобы мы могли всё лучше подготовить к вашему приходу.</p>
 
         <form id="rsvpForm">
           <label>
@@ -465,36 +295,26 @@ body {
             </select>
           </label>
 
+          <!-- ВОТ ОН: «что вы пьёте» теперь в виде выпадающего списка -->
           <label>
             Что вы пьёте?
-            <div class="radio-group">
-              <label class="radio-primary">
-                <input type="radio" name="drink" value="red_wine" /> Вино красное
-              </label>
-              <label class="radio-primary">
-                <input type="radio" name="drink" value="white_wine" /> Вино белое
-              </label>
-              <label class="radio-primary">
-                <input type="radio" name="drink" value="champagne" /> Шампанское
-              </label>
-              <label class="radio-primary">
-                <input type="radio" name="drink" value="vodka" /> Водка
-              </label>
-              <label class="radio-primary">
-                <input type="radio" name="drink" value="samogon" /> Самогон
-              </label>
-              <label class="radio-primary">
-                <input type="radio" name="drink" value="non_alcohol" /> Безалкогольные напитки
-              </label>
-            </div>
+            <select name="drink">
+              <option value="" disabled selected>Выберите напиток</option>
+              <option value="red_wine">Вино красное</option>
+              <option value="white_wine">Вино белое</option>
+              <option value="champagne">Шампанское</option>
+              <option value="vodka">Водка</option>
+              <option value="samogon">Самогон</option>
+              <option value="non_alcohol">Безалкогольные напитки</option>
+            </select>
           </label>
 
           <label>
-            Примечания (аллергии, пожелания и т.п.)
+            Примечания (аллергии, пожелания)
             <textarea name="notes" rows="3"></textarea>
           </label>
 
-          <button type="submit" class="submit-btn">
+          <button type="submit" class="btn-primary btn-grow">
             До 1 июля подтвердите пожалуйста Ваше присутствие.
           </button>
         </form>
@@ -502,31 +322,61 @@ body {
         <div id="thanks" class="thanks">
           Спасибо за подтверждение! Мы ждём Вас на нашей свадьбе.
         </div>
-      </section>
-
-      <!-- Пожелания гостям -->
-      <section class="section">
-        <div class="wishes">
-          <h2>Пожелания гостям</h2>
-          <ul>
-            <li>
-              Если хотите подарить нам ценный и нужный подарок, мы будем очень благодарны за вклад в бюджет нашей молодой семьи.
-            </li>
-            <li>
-                            Желаем Вам наслаждаться тёплым вечером и встречами со старыми знакомыми, новыми членами семьи и друзьями. Также не забывайте много танцевать и оставаться позитивными весь вечер.
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div class="footer">
-        Свадьба Вячеслава и Юлии • 31.07.2026
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 
-  <!-- Firebase SDK (модульный стиль) -->
+  <footer class="footer">
+    Свадьба Вячеслава и Юлия • 31.07.2026
+  </footer>
+
+  <!-- GSAP + ScrollTrigger + Firebase (всё в одном скрипте) -->
   <script type="module">
+    // Подключаем GSAP/ScrollTrigger
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
+    script.defer = true;
+
+    script.onload = () => {
+      const scrollTriggerScript = document.createElement("script");
+      scrollTriggerScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js";
+      scrollTriggerScript.defer = true;
+      scrollTriggerScript.onload = () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade‑in секций при скролле
+        gsap.utils.toArray(".fade-in").forEach((el) => {
+          gsap.from(el, {
+            opacity: 0,
+            y: 20,
+            duration: 0.7,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          });
+        });
+
+        // Parallax фон
+        const parallaxBg = document.querySelector(".parallax-bg");
+        ScrollTrigger.create({
+          trigger: ".parallax-container",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.4,
+          onProgress: (self) => {
+            const translateY = self.progress * 60 - 10;
+            parallaxBg.style.transform = `translateY(${translateY}px)`;
+          }
+        });
+      };
+      document.head.appendChild(scrollTriggerScript);
+    };
+    document.head.appendChild(script);
+
+    // Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -566,20 +416,5 @@ body {
       }
     });
   </script>
-  <script>
-  // Анимация появления секций при скролле
-  const sections = document.querySelectorAll(".section");
-
-  function checkFadeIn() {
-    sections.forEach((sec) => {
-      const boxTop = sec.getBoundingClientRect().top;
-      const isVisible = boxTop < window.innerHeight * 0.85;
-      if (isVisible) sec.classList.add("show");
-    });
-  }
-
-  checkFadeIn();
-  window.addEventListener("scroll", checkFadeIn);
-</script>
 </body>
 </html>
