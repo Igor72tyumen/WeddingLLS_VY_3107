@@ -27,7 +27,7 @@
       min-height: 100vh;
     }
 
-    /* Parallax фон — НИЖЕ контента, не перекрывает его */
+    /* Parallax фон — фоновый, не ломает контент */
     .parallax-container {
       position: fixed;
       top: 0;
@@ -46,11 +46,11 @@
       height: 180%;
       background: url('images/background.jpg') 50% 50% no-repeat;
       background-size: cover;
-      background-attachment: fixed; /* чтобы фон был «плавным» */
+      background-attachment: fixed;
       transform: translateY(0);
     }
 
-    /* Контент поверх фона */
+    /* Контент всегда сверху */
     .main-content {
       position: relative;
       z-index: 1;
@@ -59,10 +59,10 @@
     .container {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 20px 20px 0;
     }
 
-    h1, h2, h3 {
+    h1, h2 {
       font-family: "Playfair Display", serif;
     }
 
@@ -90,7 +90,7 @@
       font-size: 1.1rem;
     }
 
-    /* Секции */
+    /* Секции (всегда видны, opacity: 1) */
     .section {
       padding: 60px 0;
       background: rgba(255, 255, 255, 0.92);
@@ -157,8 +157,8 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       font-size: 0.95rem;
-      transition: border 0.3s ease, box-shadow 0.3s ease;
       background: #fff;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
     }
 
     .rsvp input[type="text"]:focus,
@@ -189,7 +189,7 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.2);
     }
 
-    .thanks {
+    .thank-you {
       margin-top: 16px;
       padding: 12px;
       background: #f0f8f2;
@@ -209,16 +209,10 @@
       border-top: 1px solid #eee;
     }
 
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    @media (max-width: 768px) {
-      .hero { padding: 80px 20px 50px; }
-      .hero h1 { font-size: 2rem; }
-      .section { padding: 40px 20px; }
-      .dresscode { flex-direction: column; }
+    /* GSAP будет анимировать translateY, но изначально всё видно */
+    .fade-in-static {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -230,7 +224,7 @@
   </div>
 
   <div class="main-content">
-    <section class="hero fade-in">
+    <section class="hero fade-in-static">
       <div class="container">
         <h1>Вячеслав и Юлия</h1>
         <p class="date">31.07.2026</p>
@@ -241,18 +235,18 @@
     </section>
 
     <!-- Дресс-код -->
-    <section class="section fade-in" id="dresscode">
+    <section class="section fade-in-static" id="dresscode">
       <div class="container">
         <h2>Дресс‑код</h2>
         <p>Просим поддержать нашу цветовую атмосферу и выбрать наряд в стиле, близком к нашим примерам.</p>
 
         <div class="dresscode">
           <div class="column">
-            <img src="images/dresscode1.jpg" alt="Дресс‑код 1" class="fade-in" />
+            <img src="images/dresscode1.jpg" alt="Дресс‑код 1" />
             <div class="dresscode-caption">Пример 1: нежные оттенки с акцентами.</div>
           </div>
           <div class="column">
-            <img src="images/dresscode2.jpg" alt="Дресс‑код 2" class="fade-in" />
+            <img src="images/dresscode2.jpg" alt="Дресс‑код 2" />
             <div class="dresscode-caption">Пример 2: спокойные тона с нотками праздника.</div>
           </div>
         </div>
@@ -260,7 +254,7 @@
     </section>
 
     <!-- RSVP -->
-    <section class="section fade-in" id="rsvp">
+    <section class="section fade-in-static" id="rsvp">
       <div class="container">
         <h2>Подтверждение присутствия</h2>
 
@@ -301,7 +295,7 @@
           </button>
         </form>
 
-        <div id="thanks" class="thanks">
+        <div id="thanks" class="thank-you">
           Спасибо за подтверждение! Мы ждём Вас на нашей свадьбе.
         </div>
       </div>
@@ -312,36 +306,33 @@
     </footer>
   </div>
 
-  <!-- GSAP + ScrollTrigger (плавные fade‑in) -->
+  <!-- GSAP + ScrollTrigger (чисто «украшательство», не прячет текст) -->
   <script type="module">
-    const loadGSAP = (src) => {
-      return new Promise((resolve, reject) => {
+    const loadGSAP = (src) =>
+      new Promise((resolve, reject) => {
         const script = document.createElement("script");
         script.src = src;
         script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
       });
-    };
 
     loadGSAP("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js")
-      .then(() => {
-        return loadGSAP("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js");
-      })
+      .then(() => loadGSAP("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"))
       .then(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Fade‑in элементов
-        gsap.utils.toArray(".fade-in").forEach((el) => {
-          gsap.from(el, {
-            opacity: 0,
-            y: 20,
-            duration: 0.7,
+        // Плавная анимация (не скрывает элементы, они уже видны)
+        gsap.utils.toArray(".fade-in-static").forEach((el) => {
+          gsap.to(el, {
+            y: 0,
+            opacity: 1,
+            duration: 0.4,
             ease: "power2.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 85%",
-              toggleActions: "play none none reverse"
+              start: "top 90%",
+              toggleActions: "play none none none"
             }
           });
         });
@@ -360,7 +351,7 @@
         });
       });
 
-    // Firebase
+    // --- Firebase ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -391,9 +382,7 @@
         await addDoc(collection(db, "guests"), data);
         form.reset();
         thanks.style.display = "block";
-        setTimeout(() => {
-          thanks.style.display = "none";
-        }, 4000);
+        setTimeout(() => (thanks.style.display = "none"), 4000);
       } catch (err) {
         alert("Не удалось отправить ответ. Пожалуйста, попробуйте позже.");
         console.error(err);
