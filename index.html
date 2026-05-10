@@ -61,7 +61,6 @@
       padding: 0 20px;
     }
 
-    /* Заголовки */
     h1, h2 {
       font-family: "Playfair Display", serif;
     }
@@ -101,35 +100,35 @@
       text-align: center;
     }
 
-    /* Наша история */
-    .story-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* Дресс‑код */
+    .dresscode {
+      display: flex;
+      flex-wrap: wrap;
       gap: 24px;
     }
 
-    .story-item {
+    .dresscode .column {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .dresscode img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dresscode img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    .dresscode-caption {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      color: #777;
       text-align: center;
-    }
-
-    .story-item img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    /* Галерея */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .gallery-grid img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     /* RSVP */
@@ -222,8 +221,8 @@
     @media (max-width: 768px) {
       .hero { padding: 80px 0 60px; }
       .hero h1 { font-size: 2rem; }
-      .story-grid { grid-template-columns: 1fr; }
       .section { padding: 40px 0; }
+      .dresscode { flex-direction: column; }
     }
   </style>
 </head>
@@ -242,42 +241,30 @@
         <p class="intro-text">
           В этом году один день станет для нас особенно значимым, и мы хотим провести его в кругу самых близких нам людей.
         </p>
-        <a href="#rsvp" class="btn-primary btn-bounce">Подтвердить присутствие</a>
       </div>
     </section>
 
-    <!-- Наша история -->
-    <section class="section story fade-in" id="story">
+    <!-- Дресс-код -->
+    <section class="section fade-in" id="dresscode">
       <div class="container">
-        <h2>Наша история</h2>
-        <div class="story-grid">
-          <div class="story-item">
-            <img src="images/story-1.jpg" alt="Старт нашей истории" class="fade-in" />
-            <p>Как мы познакомились и сделали первый шаг навстречу друг другу.</p>
-          </div>
-          <div class="story-item">
-            <img src="images/story-2.jpg" alt="Счастливые моменты" class="fade-in" />
-            <p>Любимые моменты, которые привели нас к решению пожениться.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        <h2>Дресс‑код</h2>
+        <p>Просим поддержать нашу цветовую атмосферу и выбрать наряд в стиле, близком к нашим примерам.</p>
 
-    <!-- Галерея -->
-    <section class="section gallery fade-in" id="gallery">
-      <div class="container">
-        <h2>Галерея</h2>
-        <div class="gallery-grid">
-          <img src="images/gallery-1.jpg" alt="Свадебная галерея 1" class="fade-in" />
-          <img src="images/gallery-2.jpg" alt="Свадебная галерея 2" class="fade-in" />
-          <img src="images/gallery-3.jpg" alt="Свадебная галерея 3" class="fade-in" />
-          <img src="images/gallery-4.jpg" alt="Свадебная галерея 4" class="fade-in" />
+        <div class="dresscode">
+          <div class="column">
+            <img src="images/dresscode1.jpg" alt="Дресс‑код 1" class="fade-in" />
+            <div class="dresscode-caption">Пример 1: нежные оттенки с акцентами.</div>
+          </div>
+          <div class="column">
+            <img src="images/dresscode2.jpg" alt="Дресс‑код 2" class="fade-in" />
+            <div class="dresscode-caption">Пример 2: спокойные тона с нотками праздника.</div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- RSVP -->
-    <section class="section rsvp fade-in" id="rsvp">
+    <section class="section fade-in" id="rsvp">
       <div class="container">
         <h2>Подтверждение присутствия</h2>
 
@@ -295,7 +282,6 @@
             </select>
           </label>
 
-          <!-- ВОТ ОН: «что вы пьёте» теперь в виде выпадающего списка -->
           <label>
             Что вы пьёте?
             <select name="drink">
@@ -327,24 +313,24 @@
   </main>
 
   <footer class="footer">
-    Свадьба Вячеслава и Юлия • 31.07.2026
+    Свадьба Вячеслава и Юлии • 31.07.2026
   </footer>
 
-  <!-- GSAP + ScrollTrigger + Firebase (всё в одном скрипте) -->
+  <!-- GSAP + ScrollTrigger + Firebase (всё в одном файле) -->
   <script type="module">
-    // Подключаем GSAP/ScrollTrigger
-    const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
-    script.defer = true;
+    // Динамически подгружаем GSAP/ScrollTrigger
+    const gsapScript = document.createElement("script");
+    gsapScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js";
+    gsapScript.defer = true;
 
-    script.onload = () => {
+    gsapScript.onload = () => {
       const scrollTriggerScript = document.createElement("script");
       scrollTriggerScript.src = "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js";
       scrollTriggerScript.defer = true;
       scrollTriggerScript.onload = () => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Fade‑in секций при скролле
+        // Fade-in секций при скролле
         gsap.utils.toArray(".fade-in").forEach((el) => {
           gsap.from(el, {
             opacity: 0,
@@ -374,7 +360,7 @@
       };
       document.head.appendChild(scrollTriggerScript);
     };
-    document.head.appendChild(script);
+    document.head.appendChild(gsapScript);
 
     // Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
